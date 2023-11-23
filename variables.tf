@@ -95,6 +95,11 @@ variable "awsprops" {
   }
 }
 
+variable "s3_bucket_for_logs" {
+  type    = string
+  default = ""
+}
+
 
 variable "Environment" {
   type    = string

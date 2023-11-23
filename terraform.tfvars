@@ -6,6 +6,7 @@ existing_security_group_ids=["sg-0253d336f38d59e44"]
 port = ["80","443"]
 protocol=["TCP","TCP"]
 stick_session=true
+s3_bucket_for_logs="egalbdemo2023"
 
 alb_tags = {
       TicketReference            = "CHG0050760"
