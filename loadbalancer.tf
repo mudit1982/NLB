@@ -69,29 +69,29 @@ resource "aws_lb_listener" "front_end" {
   }
 }
 
-module "aws_security_group" {
-  source      = "./modules/security_group"
-  # sg_count = length(var.security_groups)
-  name = var.security_groups
-  description = var.secgroupdescription
-  vpc_id      = var.VPCID
+# module "aws_security_group" {
+#   source      = "./modules/security_group"
+#   # sg_count = length(var.security_groups)
+#   name = var.security_groups
+#   description = var.secgroupdescription
+#   vpc_id      = var.VPCID
 
-} 
+# } 
 
 
-resource "aws_security_group_rule" "ingress_rules" {
+# resource "aws_security_group_rule" "ingress_rules" {
 
-  count = length(var.ingress_rules)
+#   count = length(var.ingress_rules)
 
-  type              = "ingress"
-  from_port         = var.ingress_rules[count.index].from_port
-  to_port           = var.ingress_rules[count.index].to_port
-  protocol          = var.ingress_rules[count.index].protocol
-  cidr_blocks       = [var.ingress_rules[count.index].cidr_block]
-  description       = var.ingress_rules[count.index].description
-  # security_group_id = module.aws_security_group.id[count.index]
-  security_group_id = module.aws_security_group.id
-}
+#   type              = "ingress"
+#   from_port         = var.ingress_rules[count.index].from_port
+#   to_port           = var.ingress_rules[count.index].to_port
+#   protocol          = var.ingress_rules[count.index].protocol
+#   cidr_blocks       = [var.ingress_rules[count.index].cidr_block]
+#   description       = var.ingress_rules[count.index].description
+#   # security_group_id = module.aws_security_group.id[count.index]
+#   security_group_id = module.aws_security_group.id
+# }
 
 
 
@@ -100,7 +100,7 @@ resource "aws_lb" "front" {
   internal           = true
   load_balancer_type = "network"
   # security_groups    = [module.aws_security_group.id]
-  security_groups    =  concat([module.aws_security_group.id] , var.existing_security_group_ids[*])
+  # security_groups    =  concat([module.aws_security_group.id] , var.existing_security_group_ids[*])
   # security_groups     = [module.security_group.id]
   subnets            = [for subnet in var.SUBNET_ID : subnet]
   
