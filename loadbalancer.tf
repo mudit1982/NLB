@@ -97,7 +97,7 @@ resource "aws_security_group_rule" "ingress_rules" {
 
 resource "aws_lb" "front" {
   name               = "EG-NLB-TEST"
-  internal           = false
+  internal           = true
   load_balancer_type = "network"
   # security_groups    = [module.aws_security_group.id]
   security_groups    =  concat([module.aws_security_group.id] , var.existing_security_group_ids[*])

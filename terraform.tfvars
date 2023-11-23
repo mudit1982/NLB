@@ -4,7 +4,7 @@ instance=["i-06450e21d58084255","i-0ea77aa338a3ed31b"]
 SUBNET_ID=["subnet-0b86a94123ccf1094","subnet-04eff055558594bd7"]
 existing_security_group_ids=["sg-0fa3f7060ad66d3be"]
 port = ["80","443"]
-protocol=["HTTP","HTTPS"]
+protocol=["TCP","TCP"]
 stick_session=true
 
 alb_tags = {
