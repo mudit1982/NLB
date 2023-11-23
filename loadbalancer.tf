@@ -22,7 +22,7 @@ locals {
 resource "aws_lb_target_group" "front" {
   name     = "application-front"
   port     = 80
-  protocol = "HTTP"
+  protocol = "TCP"
   vpc_id   = var.VPCID
 
 ##Enable/Disable stickiness  

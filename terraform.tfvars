@@ -60,7 +60,7 @@ target_group = {
     matcher             = 200
     path                = "/"
     port                = "traffic-port"
-    protocol            = "HTTP"
+    protocol            = "TCP"
     timeout             = 3
     unhealthy_threshold = 2
     }
