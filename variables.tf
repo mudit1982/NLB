@@ -5,6 +5,11 @@ variable "region" {
   default     = "us-east-2"
 }
 
+variable "account_id" {
+  type        = number
+  description = "AWS Account Id"
+}
+
 variable "VPCID" {
   type        = string
   description = "The ID of the VPC that the instance security group belongs to"

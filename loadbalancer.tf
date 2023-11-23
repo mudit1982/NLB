@@ -3,6 +3,51 @@ locals {
  
   }
 
+resource "aws_s3_bucket_policy" "bucket_policy" {
+  bucket = var.s3_bucket_for_logs
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AllowELBRootAccount",
+            "Effect": "Allow",
+            "Principal": "arn:aws:iam::${var.account_id}:root",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${var.s3_bucket_for_logs}/test-nlb/*"
+        },
+        {
+            "Sid": "AWSLogDeliveryWrite",
+            "Effect": "Allow",
+            "Principal": "arn:aws:iam::${var.account_id}:root",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${var.s3_bucket_for_logs}/test-nlb/*",
+            "Condition": {
+                "StringEquals": {
+                    "s3:x-amz-acl": "bucket-owner-full-control"
+                }
+            }
+        },
+        {
+            "Sid": "AWSLogDeliveryAclCheck",
+            "Effect": "Allow",
+            "Principal": "arn:aws:iam::${var.account_id}:root",
+            "Action": "s3:GetBucketAcl",
+            "Resource": "arn:aws:s3:::${var.s3_bucket_for_logs}/test-nlb/*"
+        },
+        {
+            "Sid": "AllowALBAccess",
+            "Effect": "Allow",
+            "Principal": "arn:aws:iam::${var.account_id}:root",
+            "Action": "s3:PutObject",
+            "Resource": "arn:aws:s3:::${var.s3_bucket_for_logs}/test-nlb/**"
+        }
+    ]
+}
+EOF
+}
+
 resource "aws_lb_target_group" "network-lb-target-group" {
   name     = "network-front"
   port     = 80
