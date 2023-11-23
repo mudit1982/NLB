@@ -26,10 +26,10 @@ resource "aws_lb_target_group" "front" {
   vpc_id   = var.VPCID
 
 ##Enable/Disable stickiness  
-  stickiness {
-    enabled = var.stick_session
-    type    = "lb_cookie"
-  }
+  # stickiness {
+  #   enabled = var.stick_session
+  #   type    = "lb_cookie"
+  # }
 
   # health_check {
   #   # enabled             = true
