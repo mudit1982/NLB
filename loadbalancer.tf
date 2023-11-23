@@ -3,69 +3,31 @@ locals {
  
   }
 
-# locals {
-#   target_group = {
-#     "healthy_threshold"  = 3
-#     "interval"           = 10
-#     "matcher"             = 200
-#     "path"              = "/"
-#     "port"                = "traffic-port"
-#     "protocol"            = "HTTP"
-#     "timeout"             = 3
-#     "unhealthy_threshold" = 2
-#   }
-# }
-
-
-
-##All these should be used as variables
-resource "aws_lb_target_group" "front" {
-  name     = "application-front"
+resource "aws_lb_target_group" "network-lb-target-group" {
+  name     = "network-front"
   port     = 80
   protocol = "TCP"
   vpc_id   = var.VPCID
 
-##Enable/Disable stickiness  
-  # stickiness {
-  #   enabled = var.stick_session
-  #   type    = "lb_cookie"
-  # }
-
-  # health_check {
-  #   # enabled             = true
-  #   # healthy_threshold   = lookup ( var.target_group , "healthy_threshold")
-  #   # interval            = lookup ( var.target_group , "interval") 
-  #   # matcher             = lookup ( var.target_group , "matcher")
-  #   # path                = lookup ( var.target_group   , "path")
-  #   # port                = lookup ( var.target_group , "port")
-  #   protocol            = lookup ( var.target_group , "protocol")
-  #   # timeout             = lookup ( var.target_group , "timeout")
-  #   # unhealthy_threshold = lookup ( var.target_group , "unhealthy_threshold")
-    
-  # }
 }
-
-
 
 resource "aws_lb_target_group_attachment" "attach-app1" {
   count            = length(var.instance)
-  target_group_arn = aws_lb_target_group.front.arn
+  target_group_arn = aws_lb_target_group.network-lb-target-group.arn
   target_id        = element(var.instance[*], count.index)
   port             = 80
 }
 
-## Unable to Create HTTPS Listener as certificate is required
+
 resource "aws_lb_listener" "front_end" {
-  load_balancer_arn = aws_lb.front.arn
-  # port              = "80"
-  # protocol          = "HTTP"
+  load_balancer_arn = aws_lb.network-lb.arn
   count = length(var.port)
   port    = var.port[count.index]
   protocol  = var.protocol[count.index]
 
   default_action {
     type             = "forward"
-    target_group_arn = aws_lb_target_group.front.arn
+    target_group_arn = aws_lb_target_group.network-lb-target-group.arn
   }
 }
 
@@ -95,7 +57,7 @@ resource "aws_lb_listener" "front_end" {
 
 
 
-resource "aws_lb" "front" {
+resource "aws_lb" "network-lb" {
   name               = "EG-NLB-TEST"
   internal           = true
   load_balancer_type = "network"
