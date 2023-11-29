@@ -64,7 +64,7 @@ resource "aws_lb_target_group_attachment" "attach-app1" {
 }
 
 
-resource "aws_lb_listener" "front_end" {
+resource "aws_lb_listener" "tcp" {
   load_balancer_arn = aws_lb.network-lb.arn
   count = length(var.port)
   port    = var.port[count.index]
@@ -110,9 +110,7 @@ resource "aws_lb" "network-lb" {
   # security_groups    =  concat([module.aws_security_group.id] , var.existing_security_group_ids[*])
   # security_groups     = [module.security_group.id]
   subnets            = [for subnet in var.SUBNET_ID : subnet]
-  
-# If enabled Terraform would not be able to delete the LB
-  enable_deletion_protection = false
+  enable_deletion_protection = true
 
   access_logs { 
     bucket  = var.s3_bucket_for_logs
