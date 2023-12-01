@@ -53,7 +53,7 @@ resource "aws_lb_target_group" "network-lb-target-group" {
   port     = 80
   protocol = "TCP"
   vpc_id   = var.VPCID
-  preserve_client_ip = true
+  preserve_client_ip = false
 
   health_check {
     enabled             = true
