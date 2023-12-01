@@ -6,8 +6,10 @@ SUBNET_ID=["subnet-0b86a94123ccf1094","subnet-04eff055558594bd7"]
 # existing_security_group_ids=["sg-0fa3f7060ad66d3be"]
 port = ["80","443"]
 protocol=["TCP","TCP"]
-stick_session=true
+preserve_client_ip=true
 s3_bucket_for_logs="egalbdemo2023"
+#True for Internal Load Balancer and False for External Load Balancer
+internal_load_balancer=false
 
 alb_tags = {
       TicketReference            = "CHG0050760"

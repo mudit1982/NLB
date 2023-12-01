@@ -213,11 +213,19 @@ variable "alb_tags" {
 }
 
 
-variable "stick_session" {
+variable "preserve_client_ip" {
   type    = bool
   default = true
 
 }
+
+variable "internal_load_balancer" {
+  type    = bool
+  default = true
+}
+
+
+
 
 variable "target_group" {
   type = map(string)

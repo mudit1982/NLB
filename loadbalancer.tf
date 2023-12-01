@@ -53,7 +53,7 @@ resource "aws_lb_target_group" "network-lb-target-group" {
   port     = 80
   protocol = "TCP"
   vpc_id   = var.VPCID
-  preserve_client_ip = false
+  preserve_client_ip = var.preserve_client_ip
 
   health_check {
     enabled             = true
@@ -117,7 +117,7 @@ resource "aws_lb_listener" "tcp" {
 
 resource "aws_lb" "network-lb" {
   name               = "EG-NLB-TEST"
-  internal           = true
+  internal           = var.internal_load_balancer
   load_balancer_type = "network"
   # security_groups    = [module.aws_security_group.id]
   # security_groups    =  concat([module.aws_security_group.id] , var.existing_security_group_ids[*])
