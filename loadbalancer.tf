@@ -54,11 +54,6 @@ resource "aws_lb_target_group" "network-lb-target-group" {
   protocol = "TCP"
   vpc_id   = var.VPCID
   preserve_client_ip = true
-  ##Enable/Disable stickiness  
-  stickiness {
-    enabled = var.stick_session
-    type    = "lb_cookie"
-  }
 
   health_check {
     enabled             = true
