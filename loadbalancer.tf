@@ -140,3 +140,19 @@ resource "aws_lb" "network-lb" {
       ServiceCriticality = var.ServiceCriticality,
       VPC-id = var.VPCID})
   }
+
+# resource "aws_load_balancer_policy" "wu-tang-ssl" {
+#   load_balancer_name = aws_lb.network-lb.name
+#   policy_name        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
+#   policy_type_name   = "SSLNegotiationPolicyType"
+
+# }
+
+resource "aws_load_balancer_listener_policy" "wu-tang-listener-policies-443" {
+  load_balancer_name = aws_lb.network-lb.name
+  load_balancer_port = 443
+
+  policy_names = [
+    "ELBSecurityPolicy-TLS-1-2-Ext-2018-06",
+  ]
+}
