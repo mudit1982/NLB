@@ -30,6 +30,12 @@ variable "secret_key" {
   default     = ""
 }
 
+variable "certificate_id" {
+  description = "Certificate ID for the HTTPS Lisetner"
+  type        = string
+  default     = ""
+}
+
 variable "subnet_cidr_public" {
   description = "cidr blocks for the public subnets"
   default     = ["10.20.20.0/28", "10.20.20.16/28", "10.20.20.32/28"]

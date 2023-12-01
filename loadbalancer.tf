@@ -82,12 +82,16 @@ resource "aws_lb_listener" "tcp" {
   count = length(var.port)
   port    = var.port[count.index]
   protocol  = var.protocol[count.index]
-
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
+  certificate_arn = "arn:aws:acm:${var.region}:${var.account_id}:certificate/${var.certificate_id}"
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.network-lb-target-group.arn
   }
 }
+
+
+
 
 # module "aws_security_group" {
 #   source      = "./modules/security_group"
