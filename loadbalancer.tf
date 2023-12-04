@@ -90,7 +90,7 @@ resource "aws_lb_listener" "tcp" {
 
 resource "aws_alb_listener" "tls" {
   load_balancer_arn = aws_lb.network-lb.arn
-  port              = 443
+  port              = 447
   protocol          = "TLS"
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
   certificate_arn = "arn:aws:acm:${var.region}:${var.account_id}:certificate/${var.certificate_id}"
@@ -129,21 +129,5 @@ resource "aws_lb" "network-lb" {
       VPC-id = var.VPCID})
   }
 
-# resource "aws_load_balancer_policy" "wu-tang-ssl" {
-#   load_balancer_name = aws_lb.network-lb.name
-#   policy_name        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
-#   policy_type_name   = "SSLNegotiationPolicyType"
 
-# }
-
-# resource "aws_load_balancer_policy" "wu-tang-ssl-tls-1-1" {
-#   load_balancer_name = aws_lb.network-lb.name
-#   policy_name        = "wu-tang-ssl"
-#   policy_type_name   = "SSLNegotiationPolicyType"
-
-#   policy_attribute {
-#     name  = "Reference-Security-Policy"
-#     value = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
-#   }
-# }
 
