@@ -91,7 +91,7 @@ resource "aws_lb_listener" "tcp" {
 resource "aws_alb_listener" "tls" {
   load_balancer_arn = aws_lb.network-lb.arn
   port              = 443
-  protocol          = "HTTPS"
+  protocol          = "TLS"
   ssl_policy        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
   certificate_arn = "arn:aws:acm:${var.region}:${var.account_id}:certificate/${var.certificate_id}"
   default_action {
