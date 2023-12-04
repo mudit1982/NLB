@@ -4,8 +4,8 @@ account_id=215691912540
 instance=["i-059c3dd987f516592","i-02b437a17130fe818"]
 SUBNET_ID=["subnet-0b86a94123ccf1094","subnet-04eff055558594bd7"]
 # existing_security_group_ids=["sg-0fa3f7060ad66d3be"]
-port = ["80","443","443"]
-protocol=["TCP","TCP","TLS"]
+port = ["80","443"]
+protocol=["TCP","TCP"]
 preserve_client_ip=true
 s3_bucket_for_logs="egalbdemo2023"
 #True for Internal Load Balancer and False for External Load Balancer
