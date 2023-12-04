@@ -59,7 +59,6 @@ resource "aws_lb_target_group" "network-lb-target-group" {
     enabled             = true
     healthy_threshold   = lookup ( var.target_group , "healthy_threshold")
     interval            = lookup ( var.target_group , "interval") 
-    # matcher             = lookup ( var.target_group , "matcher")
     port                = lookup ( var.target_group , "port")
     protocol            = lookup ( var.target_group , "protocol")
     timeout             = lookup  ( var.target_group , "timeout")
@@ -82,8 +81,6 @@ resource "aws_lb_listener" "tcp" {
   count = length(var.port)
   port    = var.port[count.index]
   protocol  = var.protocol[count.index]
-  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
-  certificate_arn = "arn:aws:acm:${var.region}:${var.account_id}:certificate/${var.certificate_id}"
   default_action {
     type             = "forward"
     target_group_arn = aws_lb_target_group.network-lb-target-group.arn
@@ -91,31 +88,18 @@ resource "aws_lb_listener" "tcp" {
 }
 
 
-
-
-# module "aws_security_group" {
-#   source      = "./modules/security_group"
-#   # sg_count = length(var.security_groups)
-#   name = var.security_groups
-#   description = var.secgroupdescription
-#   vpc_id      = var.VPCID
-
-# } 
-
-
-# resource "aws_security_group_rule" "ingress_rules" {
-
-#   count = length(var.ingress_rules)
-
-#   type              = "ingress"
-#   from_port         = var.ingress_rules[count.index].from_port
-#   to_port           = var.ingress_rules[count.index].to_port
-#   protocol          = var.ingress_rules[count.index].protocol
-#   cidr_blocks       = [var.ingress_rules[count.index].cidr_block]
-#   description       = var.ingress_rules[count.index].description
-#   # security_group_id = module.aws_security_group.id[count.index]
-#   security_group_id = module.aws_security_group.id
-# }
+resource "aws_alb_listener" "tls" {
+  load_balancer_arn = aws_lb.front.arn
+  port              = 443
+  protocol          = "HTTPS"
+  ssl_policy        = "ELBSecurityPolicy-TLS-1-2-Ext-2018-06"
+  certificate_arn = "arn:aws:acm:${var.region}:${var.account_id}:certificate/${var.certificate_id}"
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.front.arn
+    
+  }
+}
 
 
 
@@ -136,7 +120,7 @@ resource "aws_lb" "network-lb" {
   }
 
 
-  tags = merge(tomap(var.alb_tags),{ApplicationFunctionality = var.ApplicationFunctionality, 
+  tags = merge(tomap(var.nlb_tags),{ApplicationFunctionality = var.ApplicationFunctionality, 
       ApplicationOwner = var.ApplicationOwner, 
       ApplicationTeam = var.ApplicationTeam, 
       BusinessOwner = var.BusinessOwner,

@@ -12,7 +12,7 @@ s3_bucket_for_logs="egalbdemo2023"
 internal_load_balancer=false
 certificate_id="edd0bad0-21c4-410a-907d-32efac02f8b8"
 
-alb_tags = {
+nlb_tags = {
       TicketReference            = "CHG0050760"
       DNSEntry                   = "csdasd"
       DesignDocumentLink         = "acbv"
@@ -30,39 +30,9 @@ BusinessTower="abc@gmail.com"
 ServiceCriticality="Medium"
 
 
-
-ingress_rules =[
- 
-{
-      from_port   = "80"
-      to_port     = "80"
-      protocol    = "tcp"
-      cidr_block  = "192.168.161.215/32"
-      description = "ELB"
-    },
-
-    {
-      from_port   = "8080"
-      to_port     = "8080"
-      protocol    = "tcp"
-      cidr_block  = "192.168.161.215/32"
-      description = "ELB Port 8080"
-    },
-{
-      from_port   = "1234"
-      to_port     = "1234"
-      protocol    = "tcp"
-      cidr_block  = "192.168.161.215/32"
-      description = "ELB Port 1234"
-    }
-]
-
-
-
 target_group = {
     healthy_threshold   =  3
     interval            = 10
-    # matcher             = 200
     path                = "/"
     port                = "traffic-port"
     protocol            = "TCP"

@@ -197,7 +197,7 @@ variable "ServiceCriticality" {
 
 
 
-variable "alb_tags" {
+variable "nlb_tags" {
     default = {
     }
     description = "Tags for WIndows Ec2 instances"
