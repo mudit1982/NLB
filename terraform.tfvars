@@ -2,12 +2,13 @@ VPCID="vpc-0419802ed12eec58a"
 account_id=215691912540
 #EC2 instances to be added as target group
 instance=["i-059c3dd987f516592","i-02b437a17130fe818"]
-SUBNET_ID=["subnet-0b86a94123ccf1094","subnet-04eff055558594bd7"]
+SUBNET_ID=["subnet-0b86a94123ccf1094","subnet-0bbf1e60c1a0f1db1"]
 # existing_security_group_ids=["sg-0fa3f7060ad66d3be"]
 port = ["80","443"]
 protocol=["TCP","TCP"]  
 preserve_client_ip=true
-s3_bucket_for_logs="egalbdemo2023"
+cross_zone_load_balancing=true
+s3_bucket_for_logs="egalbdemo2023"  
 #True for Internal Load Balancer and False for External Load Balancer
 internal_load_balancer=false
 certificate_id="edd0bad0-21c4-410a-907d-32efac02f8b8"

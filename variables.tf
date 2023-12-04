@@ -225,6 +225,11 @@ variable "preserve_client_ip" {
 
 }
 
+variable "cross_zone_load_balancing" {
+  type    = bool
+  default = true
+}
+
 variable "internal_load_balancer" {
   type    = bool
   default = true

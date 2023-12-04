@@ -66,6 +66,14 @@ resource "aws_lb_target_group" "network-lb-target-group" {
     
   }
 
+    tags = merge(tomap(var.nlb_tags),{ApplicationFunctionality = var.ApplicationFunctionality, 
+      ApplicationOwner = var.ApplicationOwner, 
+      ApplicationTeam = var.ApplicationTeam, 
+      BusinessOwner = var.BusinessOwner,
+      BusinessTower = var.BusinessTower,
+      ServiceCriticality = var.ServiceCriticality,
+      VPC-id = var.VPCID})  
+
 }
 
 resource "aws_lb_target_group_attachment" "attach-app1" {
@@ -107,11 +115,9 @@ resource "aws_lb" "network-lb" {
   name               = "EG-NLB-TEST"
   internal           = var.internal_load_balancer
   load_balancer_type = "network"
-  # security_groups    = [module.aws_security_group.id]
-  # security_groups    =  concat([module.aws_security_group.id] , var.existing_security_group_ids[*])
-  # security_groups     = [module.security_group.id]
   subnets            = [for subnet in var.SUBNET_ID : subnet]
   enable_deletion_protection = true
+  enable_cross_zone_load_balancing=var.cross_zone_load_balancing
 
   access_logs { 
     bucket  = var.s3_bucket_for_logs
