@@ -59,7 +59,7 @@ resource "aws_lb_target_group" "network-lb-target-group" {
 
   stickiness {
     enabled = var.stick_session
-    type    = "lb_cookie"
+    type    = "source_ip"
   }
 
 
