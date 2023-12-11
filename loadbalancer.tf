@@ -55,6 +55,14 @@ resource "aws_lb_target_group" "network-lb-target-group" {
   vpc_id   = var.VPCID
   preserve_client_ip = var.preserve_client_ip
 
+
+
+  stickiness {
+    enabled = var.stick_session
+    type    = "lb_cookie"
+  }
+
+
   health_check {
     enabled             = true
     healthy_threshold   = lookup ( var.target_group , "healthy_threshold")

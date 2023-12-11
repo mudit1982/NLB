@@ -225,6 +225,13 @@ variable "preserve_client_ip" {
 
 }
 
+variable "stick_session" {
+  type    = bool
+  default = false
+
+}
+
+
 variable "cross_zone_load_balancing" {
   type    = bool
   default = true

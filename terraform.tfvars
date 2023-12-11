@@ -12,6 +12,8 @@ s3_bucket_for_logs="egalbdemo2023"
 #True for Internal Load Balancer and False for External Load Balancer
 internal_load_balancer=false
 certificate_id="edd0bad0-21c4-410a-907d-32efac02f8b8"
+stick_session=false
+
 
 nlb_tags = {
       TicketReference            = "CHG0050760"
