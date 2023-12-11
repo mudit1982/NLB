@@ -56,7 +56,7 @@ resource "aws_lb_target_group" "network-lb-target-group" {
   preserve_client_ip = var.preserve_client_ip
 
 
-
+  ##Enable/Disable stickiness 
   stickiness {
     enabled = var.stick_session
     type    = "source_ip"
