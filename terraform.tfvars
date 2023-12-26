@@ -11,7 +11,7 @@ cross_zone_load_balancing=true
 s3_bucket_for_logs="egalbdemo2023"  
 #True for Internal Load Balancer and False for External Load Balancer
 internal_load_balancer=false
-certificate_id="edd0bad0-21c4-410a-907d-32efac02f8b8"
+certificate_id="5c4a4330-e55d-47e2-8654-f7f836a1be3e"
 stick_session=true
 
 
