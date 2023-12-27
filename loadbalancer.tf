@@ -120,7 +120,7 @@ resource "aws_alb_listener" "tls" {
 
 
 resource "aws_lb" "network-lb" {
-  name               = "EG-NLB-TEST"
+  name               = "EG-NLB-TEST-DEMO"
   internal           = var.internal_load_balancer
   load_balancer_type = "network"
   subnets            = [for subnet in var.SUBNET_ID : subnet]

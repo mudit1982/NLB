@@ -10,7 +10,7 @@ preserve_client_ip=true
 cross_zone_load_balancing=true
 s3_bucket_for_logs="egalbdemo2023"  
 #True for Internal Load Balancer and False for External Load Balancer
-internal_load_balancer=false
+internal_load_balancer=true
 certificate_id="5c4a4330-e55d-47e2-8654-f7f836a1be3e"
 stick_session=true
 
