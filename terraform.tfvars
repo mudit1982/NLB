@@ -43,4 +43,10 @@ target_group = {
     unhealthy_threshold = 2
     }
 
+##Name of the ALB . Naming Covention alb-app-name-environment-int/ext. Int for Internal LB
+#and ext for External
+Name_NLB = "nlb-app-name-environment-int  "
 
+##Name of the Target Group.Naming Covention alb-tg-app-name-environment-int/ext.Int 
+#for Internal LB and ext for External
+Name_Target_Group = "nlb-tg-app-name-environment-int"

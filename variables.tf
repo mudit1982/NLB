@@ -260,5 +260,14 @@ variable "target_group" {
   
 }
 
+variable "Name_NLB" {
+  type        = string
+  description = "Name of the ALB"
+}
+
+variable "Name_Target_Group" {
+  type        = string
+  description = "Name of the Target Group"
+}
 
    
